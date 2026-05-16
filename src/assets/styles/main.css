@@ -1,0 +1,118 @@
+/* 
+  Modern Futuristic Design System - Final Corrective Version
+  For Software Consulting Firm
+*/
+
+:root {
+  /* Fonts */
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --heading: 'Outfit', var(--sans);
+  
+  /* Core Colors - Light Mode (Default) - Professional Corporate Style */
+  --bg: #ffffff;
+  --bg-alt: #f8f9fa;
+  --text: #334155;
+  --text2: #64748b;
+  --text-h: #0f172a;
+  --border: #e2e8f0;
+  --accent: #2563eb;
+  --accent-secondary: #1d4ed8;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --nav-glow: rgba(37, 99, 235, 0.1);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Universal Dark Theme Enforcement */
+:root.dark-theme, [data-bs-theme="dark"] {
+  --bg: #0f172a;
+  --bg-alt: #1e293b;
+  --text: #cbd5e1;
+  --text2: #94a3b8;
+  --text-h: #f8fafc;
+  --border: rgba(255, 255, 255, 0.1);
+  --nav-bg: rgba(15, 23, 42, 0.95);
+  --nav-glow: rgba(37, 99, 235, 0.15);
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Transitions */
+* {
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+  box-sizing: border-box;
+}
+
+/* Global Theme Priority (Forcing all sections to follow the theme) */
+html, body, #app, section, .section-padding, .bg-light {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+.bg-light {
+  background-color: var(--bg-alt) !important;
+}
+
+h1, h2, h3, h4, .section-title, .display-2 {
+  color: var(--text-h) !important;
+}
+
+.text-muted, .section-subtitle, p.lead {
+  color: var(--text2);
+  opacity: 0.9;
+}
+
+.material-card {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 16px;
+}
+
+.material-card:hover { 
+  transform: translateY(-4px); 
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* Base Body */
+body {
+  margin: 0;
+  font-family: var(--sans);
+  line-height: 1.6;
+}
+
+.section-padding { padding: 100px 0; }
+
+h1, h2, h3, h4 { font-family: var(--heading); font-weight: 700; }
+
+/* Bootstrap Overrides */
+.form-control {
+  background-color: var(--bg-alt) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+}
+
+.form-control:focus {
+  background-color: var(--bg) !important;
+  border-color: var(--accent) !important;
+  color: var(--text-h) !important;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border: none;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  color: white !important;
+  box-shadow: 0 4px 6px -1px var(--nav-glow);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: var(--accent-secondary);
+  box-shadow: 0 6px 8px -1px var(--nav-glow);
+  transform: translateY(-1px);
+}

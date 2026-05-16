@@ -1,0 +1,94 @@
+/* 
+  Modern Futuristic Design System - Final Polish
+  Software Consulting Firm
+*/
+
+:root {
+  /* Default Light Theme Variables */
+  --bg: #ffffff;
+  --bg-alt: #f8f9fa;
+  --text: #4a5568;
+  --text-h: #1a202c;
+  --border: #e2e8f0;
+  --accent: #00f2fe;
+  --accent-secondary: #4facfe;
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --nav-glow: rgba(0, 242, 254, 0.2);
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --heading: 'Outfit', sans-serif;
+  --sans: 'Inter', sans-serif;
+}
+
+/* Dark Theme State */
+:root.dark-theme, [data-bs-theme="dark"] {
+  --bg: #0a0a0c;
+  --bg-alt: #121214;
+  --text: #e2e8f0;
+  --text-h: #ffffff;
+  --border: rgba(255, 255, 255, 0.12);
+  --nav-bg: rgba(10, 10, 12, 0.95);
+  --nav-glow: rgba(0, 242, 254, 0.4);
+  --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+}
+
+/* --- Universal Theme Enforcement --- */
+html, body, #app, section, .section-padding {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.bg-light {
+  background-color: var(--bg-alt) !important;
+}
+
+h1, h2, h3, h4, .section-title, .display-2 {
+  color: var(--text-h) !important;
+}
+
+.text-muted, .section-subtitle, p.lead {
+  color: var(--text) !important;
+  opacity: 0.9;
+}
+
+.material-card {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.material-card:hover { transform: translateY(-8px); }
+
+/* --- Base Body --- */
+body {
+  margin: 0;
+  font-family: var(--sans);
+  line-height: 1.6;
+}
+
+.section-padding { padding: 100px 0; }
+
+#app {
+  width: 100%;
+  min-height: 100svh;
+}
+
+/* Bootstrap Theme Overrides */
+.form-control {
+  background-color: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 12px;
+}
+
+.form-control:focus {
+  background-color: var(--bg);
+  border-color: var(--accent);
+  color: var(--text-h);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  border: none;
+}
