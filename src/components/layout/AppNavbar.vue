@@ -12,6 +12,8 @@ const menuItems = [
   { name: 'Servicios', icon: 'layers', href: '#services' },
   { name: 'Nosotros', icon: 'info', href: '#about' },
   { name: 'Proyectos', icon: 'work', href: '#projects' },
+  { name: 'Paquetes', icon: 'local_offer', href: '#pricing' },
+  { name: 'Testimonios', icon: 'star', href: '#testimonials' },
   { name: 'Contacto', icon: 'mail', href: '#contact' }
 ]
 
@@ -250,14 +252,14 @@ onUnmounted(() => {
 }
 
 .mobile-tab-bar {
-  background: var(--nav-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--border);
-  border-radius: 25px;
+  background: rgba(20, 40, 80, 0.45);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(0, 242, 254, 0.15);
+  border-radius: 28px;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  padding: 12px 16px;
+  box-shadow: 0 8px 32px rgba(0, 242, 254, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
 }
 
@@ -268,25 +270,28 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  color: var(--text);
+  color: rgba(255, 255, 255, 0.7);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
   position: relative;
-  height: 50px; /* fixed height for consistent vertical alignment */
+  height: 50px;
 }
 
 .mobile-tab-item .material-icons {
+  color: rgba(255, 255, 255, 0.6);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.35rem;
 }
 
 .mobile-tab-item.active {
-  /* No parent transform to avoid moving text out of bounds */
+  color: #fff;
 }
 
 .mobile-tab-item.active .material-icons {
   color: #fff;
-  transform: translateY(-20px); /* Move only the icon up into the drop */
+  transform: translateY(-20px);
   z-index: 3;
+  filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.4));
 }
 
 .tab-label {
@@ -294,11 +299,12 @@ onUnmounted(() => {
   font-weight: 800;
   text-transform: uppercase;
   position: absolute;
-  bottom: 5px; /* Stick to bottom of tab item */
+  bottom: 5px;
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: var(--text-h);
+  color: rgba(235, 225, 225, 0.7);
+  letter-spacing: 0.5px;
 }
 
 .mobile-tab-item.active .tab-label {
@@ -316,20 +322,55 @@ onUnmounted(() => {
   transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.liquid-drop {
+/* .liquid-drop {
   width: 50px;
   height: 50px;
-  background: var(--accent);
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.8), rgba(79, 172, 254, 0.6));
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-  border: 4px solid var(--bg); /* Create a gap effect against the background */
-}
+  box-shadow: 0 8px 24px rgba(0, 242, 254, 0.3), inset -2px -2px 6px rgba(0, 0, 0, 0.1), inset 2px 2px 6px rgba(255, 255, 255, 0.1);
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+} */
 
 .btn-clear {
   background: transparent;
   border: none;
   padding: 0;
 }
+
+/* Light theme mobile nav adjustments */
+:root.light-theme .mobile-tab-bar {
+  background: rgba(220, 230, 245, 0.45);
+  border: 1px solid rgba(79, 172, 254, 0.25);
+  box-shadow: 0 8px 32px rgba(79, 172, 254, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+:root.light-theme .mobile-tab-item {
+  color: rgba(26, 32, 44, 0.75);
+}
+
+:root.light-theme .mobile-tab-item .material-icons {
+  color: rgba(26, 32, 44, 0.6);
+}
+
+:root.light-theme .mobile-tab-item.active {
+  color: #0a0a0c;
+}
+
+:root.light-theme .mobile-tab-item.active .material-icons {
+  color: #0a0a0c;
+  filter: drop-shadow(0 0 8px rgba(79, 172, 254, 0.25));
+}
+
+:root.light-theme .tab-label {
+  color: rgba(18, 18, 18, 0.7);
+}
+
+/* :root.light-theme .liquid-drop {
+  background: linear-gradient(135deg, rgba(5, 206, 228, 0.726), rgba(3, 232, 248, 0.6));
+  border: 3px solid rgba(79, 172, 254, 0.25);
+  box-shadow: 0 8px 24px rgba(79, 172, 254, 0.2), inset -2px -2px 6px rgba(255, 255, 255, 0.15), inset 2px 2px 6px rgba(0, 0, 0, 0.05);
+} */
 
 /* Navbar Base... */
 .fixed-top {

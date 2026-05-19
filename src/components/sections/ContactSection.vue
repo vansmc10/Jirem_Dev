@@ -56,6 +56,16 @@
                 <textarea class="form-control" id="message" rows="4"
                   placeholder="Cuéntanos cuáles son los objetivos de tu proyecto..." required></textarea>
               </div>
+              <!-- <div class="mb-4">
+                <label for="brochure" class="form-label small fw-bold">Adjuntar Brochure o Documento (Opcional)</label>
+                <div class="input-group">
+                  <input type="file" class="form-control" id="brochure" accept=".pdf,.doc,.docx,.xls,.xlsx">
+                  <span class="input-group-text bg-light">
+                    <span class="material-icons text-primary">attach_file</span>
+                  </span>
+                </div>
+                <small class="text-muted d-block mt-2">Formatos aceptados: PDF, DOC, DOCX, XLS, XLSX (Máx. 10MB)</small>
+              </div> -->
               <button type="submit"
                 class="btn btn-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
                 Envia Mensaje <span class="material-icons">enviar</span>

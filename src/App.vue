@@ -5,6 +5,8 @@ import ServicesSection from './components/sections/ServicesSection.vue'
 import AboutSection from './components/sections/AboutSection.vue'
 import ProjectsSection from './components/sections/ProjectsSection.vue'
 import TechStackSection from './components/sections/TechStackSection.vue'
+import PricingSection from './components/sections/PricingSection.vue'
+import TestimonialsSection from './components/sections/TestimonialsSection.vue'
 import ContactSection from './components/sections/ContactSection.vue'
 import AppFooter from './components/layout/AppFooter.vue'
 </script>
@@ -18,6 +20,8 @@ import AppFooter from './components/layout/AppFooter.vue'
       <AboutSection />
       <ProjectsSection />
       <TechStackSection />
+      <PricingSection />
+      <TestimonialsSection />
       <ContactSection />
     </main>
     <AppFooter />
