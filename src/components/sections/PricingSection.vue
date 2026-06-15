@@ -32,7 +32,7 @@
               </ul>
               <p class="small text-muted mb-3"><span class="material-icons" style="font-size: 1rem;">schedule</span> 7-10 días</p>
 
-              <button class="btn btn-outline-primary w-100">
+              <button class="btn btn-outline-primary w-100" @click="consultarWhatsApp('Plan Emprende')">
                 Consultar
               </button>
             </div>
@@ -62,7 +62,7 @@
               </ul>
               <p class="small text-muted mb-3"><span class="material-icons" style="font-size: 1rem;">schedule</span> 15-20 días</p>
 
-              <button class="btn btn-primary w-100">
+              <button class="btn btn-primary w-100" @click="consultarWhatsApp('Plan Crece')">
                 Consultar Ahora
               </button>
             </div>
@@ -92,7 +92,7 @@
               </ul>
               <p class="small text-muted mb-3"><span class="material-icons" style="font-size: 1rem;">schedule</span> 25-35 días</p>
 
-              <button class="btn btn-outline-primary w-100">
+              <button class="btn btn-outline-primary w-100" @click="consultarWhatsApp('Plan Elite')">
                 Consultar
               </button>
             </div>
@@ -122,7 +122,17 @@
 </template>
 
 <script setup>
-// Sección de paquetes de precios
+const consultarWhatsApp = (paquete) => {
+  const numero = '51943712678'
+  const mensaje = encodeURIComponent(`Estimado equipo de JIREM DEV,
+
+Me gustaría recibir información detallada sobre el "${paquete}". Agradeceré me puedan compartir los beneficios, alcances y condiciones.
+
+Quedo atento a su pronta respuesta.
+
+Saludos cordiales.`)
+  window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank')
+}
 </script>
 
 <style scoped>

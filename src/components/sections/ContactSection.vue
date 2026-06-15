@@ -10,7 +10,7 @@
           <div class="contact-info">
             <div class="d-flex align-items-center mb-3">
               <span class="material-icons text-primary me-3">email</span>
-              <span class="text-muted">vansmc10@gmail.com</span>
+              <span class="text-muted">help_jirem@jiremdev.com</span>
             </div>
             <div class="d-flex align-items-center mb-3">
               <span class="material-icons text-primary me-3">phone</span>
@@ -36,24 +36,24 @@
         <div class="col-lg-7">
           <div class="material-card p-4 text-start">
             <h4 class="mb-4 fw-bold">Enviar mensaje</h4>
-            <form @submit.prevent="sendEmail">
+              <form @submit.prevent="sendEmail">
               <div class="row g-3 mb-3">
                 <div class="col-md-6">
                   <label for="name" class="form-label small fw-bold">Nombre</label>
-                  <input type="text" class="form-control" id="name" placeholder="Nombre completo" required>
+                  <input type="text" class="form-control" id="name" v-model="form.name" placeholder="Nombre completo" required>
                 </div>
                 <div class="col-md-6">
                   <label for="email" class="form-label small fw-bold">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="example@email.com" required>
+                  <input type="email" class="form-control" id="email" v-model="form.email" placeholder="example@email.com" required>
                 </div>
               </div>
               <div class="mb-3">
                 <label for="subject" class="form-label small fw-bold">Asunto</label>
-                <input type="text" class="form-control" id="subject" placeholder="Consulta de proyecto" required>
+                <input type="text" class="form-control" id="subject" v-model="form.subject" placeholder="Consulta de proyecto" required>
               </div>
               <div class="mb-4">
                 <label for="message" class="form-label small fw-bold">Mensaje</label>
-                <textarea class="form-control" id="message" rows="4"
+                <textarea class="form-control" id="message" rows="4" v-model="form.message"
                   placeholder="Cuéntanos cuáles son los objetivos de tu proyecto..." required></textarea>
               </div>
               <!-- <div class="mb-4">
@@ -68,7 +68,7 @@
               </div> -->
               <button type="submit"
                 class="btn btn-primary w-100 py-3 d-flex align-items-center justify-content-center gap-2">
-                Envia Mensaje <span class="material-icons">enviar</span>
+                Enviar Mensaje <span class="material-icons">send</span>
               </button>
             </form>
           </div>
@@ -77,6 +77,36 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { reactive } from 'vue'
+import emailjs from '@emailjs/browser'
+
+const form = reactive({
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+})
+
+const sendEmail = () => {
+  emailjs.init('DClr6-BfF42Njl_bB')
+  emailjs.send('service_bffigda', 'template_qjkgyfj', {
+    name: form.name,
+    email: form.email,
+    subject: form.subject,
+    message: form.message,
+  }).then(() => {
+    alert('Mensaje enviado con éxito. Nos pondremos en contacto pronto.')
+    form.name = ''
+    form.email = ''
+    form.subject = ''
+    form.message = ''
+  }).catch(() => {
+    alert('Error al enviar el mensaje. Inténtalo de nuevo más tarde.')
+  })
+}
+</script>
 
 <style scoped>
 .form-control {
