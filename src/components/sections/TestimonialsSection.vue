@@ -262,18 +262,20 @@
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  color: white;
+  background: var(--accent);
+  color: #fff !important;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
+  background: var(--accent-secondary);
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
 }
 
 .btn-lg {

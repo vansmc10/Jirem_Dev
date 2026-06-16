@@ -49,9 +49,18 @@ const updateTheme = () => {
 
 const indicatorStyle = computed(() => {
   const index = hoveredIndex.value !== null ? hoveredIndex.value : activeIndex.value
+  const items = document.querySelectorAll('.nav-link-text')
+  if (!items.length || index === null) return { opacity: 0, width: '0px' }
+  const item = items[index]
+  const container = item?.closest('.nav-pill-container')
+  if (!item || !container) return { opacity: 0, width: '0px' }
+  const containerRect = container.getBoundingClientRect()
+  const itemRect = item.getBoundingClientRect()
+  const gap = 6
   return {
-    transform: `translateX(${index * 110}px)`,
-    opacity: index !== null ? 1 : 0
+    transform: `translate(${itemRect.left - containerRect.left - gap}px, -50%)`,
+    width: `${itemRect.width + gap * 2}px`,
+    opacity: 1
   }
 })
 
@@ -80,11 +89,11 @@ onUnmounted(() => {
       <!-- Removed brand-glow -->
       <a class="navbar-brand d-flex align-items-center" href="#">
         <div class="">
-          <img src="../../assets/images/jiremdev_min.jpg" 
-               alt="Our Team" 
-               width="60px"
-               height="60px"
-               class="img-fluid rounded-4 shadow-md">
+           <img src="../../assets/images/jiremdev_min.jpg" 
+                alt="Our Team" 
+                width="44px"
+                height="44px"
+                class="img-fluid rounded-3 shadow-sm">
           
           <!--<span class="material-icons logo-icon">analytics</span>-->
         </div>
@@ -103,16 +112,16 @@ onUnmounted(() => {
               @mouseleave="hoveredIndex = null"
               @click="activeIndex = index">
             <a class="nav-link nav-link-pill" :href="item.href" :class="{ 'active': activeIndex === index }">
-              {{ item.name }}
+              <span class="nav-link-text">{{ item.name }}</span>
             </a>
           </li>
         </ul>
 
         <div class="nav-actions d-flex align-items-center">
-          <button @click="toggleDarkMode" class="btn-theme-toggle me-3" aria-label="Toggle Theme">
+          <button @click="toggleDarkMode" class="btn-theme-toggle" aria-label="Toggle Theme">
             <span class="material-icons">{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</span>
           </button>
-          <a href="#contact" class="btn btn-primary">Empezar Ya</a>
+          <a href="#contact" class="btn-nav-cta">Empezar Ya</a>
         </div>
       </div>
     </div>
@@ -169,39 +178,43 @@ onUnmounted(() => {
 /* Desktop Navbar Pill Indicators */
 .nav-pill-container {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px;
   border-radius: 50px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(4px);
+}
+
+:root.dark-theme .nav-pill-container {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .nav-indicator-pill {
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 100px;
-  height: calc(100% - 10px);
+  top: 50%;
+  left: 0;
+  height: 28px;
   background: var(--accent);
   border-radius: 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 0;
 }
 
 .nav-link-pill {
   position: relative;
   z-index: 1;
-  padding: 0.6rem 0 !important;
+  padding: 0.4rem 0.7rem !important;
   color: var(--text-h) !important;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 0.8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.4px;
   transition: all 0.3s ease;
-  width: 110px;
   text-align: center;
+  white-space: nowrap;
 }
 
 .nav-link-pill.active {
@@ -210,8 +223,8 @@ onUnmounted(() => {
 
 /* Theme Toggle Button - Reverted Aesthetic */
 .btn-theme-toggle {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   color: var(--text-h);
   border-radius: 50%;
   width: 44px;
@@ -222,8 +235,13 @@ onUnmounted(() => {
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(4px);
+}
+
+:root.dark-theme .btn-theme-toggle {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .btn-theme-toggle:hover {
@@ -374,24 +392,75 @@ onUnmounted(() => {
 
 /* Navbar Base... */
 .fixed-top {
-  padding: 1.5rem 0;
+  padding: 0.8rem 0;
   transition: all 0.4s ease;
   z-index: 1030;
+  margin: 0.6rem 1.2rem;
+  width: auto;
+  border-radius: 18px;
+}
+
+.nav-default {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s ease;
+}
+
+.nav-default:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+:root.dark-theme .nav-default {
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+:root.dark-theme .nav-default:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .nav-scrolled {
-  padding: 0.8rem 0;
-  background: var(--nav-bg) !important;
-  backdrop-filter: blur(12px) saturate(180%);
-  border-bottom: 1px solid var(--border);
+  padding: 0.55rem 0;
+  background: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.nav-scrolled:hover {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+:root.dark-theme .nav-scrolled {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+:root.dark-theme .nav-scrolled:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .brand-text {
   font-family: var(--heading);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   color: var(--text-h);
+  font-size: 1.1rem;
 }
 
 .logo-icon-wrapper {
@@ -401,6 +470,42 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+/* Nav Actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-nav-cta:hover {
+  background: var(--accent-secondary);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+:root.dark-theme .btn-nav-cta {
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);
 }
 
 /* Removed btn-neon */
